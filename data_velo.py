@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 import locale 
+import sys
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 from pathlib import Path
 
@@ -20,6 +21,18 @@ df = pd.read_excel (EXCEL_FILE)
 df["Emplacement"] = df["Emplacement"].str.strip().str.capitalize()
 df["Date"]= pd.to_datetime(df["Date"])
 
+## Redirection des print() vers le terminal et un fichier txt
+class Tee:
+    def __init__(self, *files):
+        self.files = files
+    def write(self, obj):
+        for f in self.files:
+            f.write(obj)
+    def flush(self):
+        for f in self.files:
+            f.flush()
+rapport = open("rapport_performance_velo.txt", "w", encoding="utf-8")
+sys.stdout = Tee(sys.stdout, rapport)
 
 ##Convertir le temps en minutes
 def to_minutes (t):
@@ -189,35 +202,7 @@ for lieu, groupe in df.groupby("Emplacement"):
 mask = df["Temps en minutes"].notna() & df["Distance (KM)"].notna()
 z = np.polyfit(df.loc[mask,"Temps en minutes"], df.loc[mask,"Distance (KM)"], 1)
 p = np.poly1d(z)
-x_line = np.linspace(dmonthly = (df.groupby(["Mois", "Emplacement"])["Distance (KM)"]).sum().unstack(fill_value=0).sort_index()
-
-# S'assurer que l'index du DataFrame "monthly" est trié par ordre chronologique
-monthly.index = pd.to_datetime(monthly.index, format="%B %Y")
-monthly = monthly.sort_index()
-monthly.index = monthly.index.strftime("%B %Y")
-
-for col in ["Gym", "Maison"]:
-    if col not in monthly.columns:
-        monthly[0] = 0
-fig, ax = plt.subplots(figsize=(12,5))
-monthly[["Gym", "Maison"]].plot(
-    kind="bar", stacked=True, ax=ax,
-    color=[COLORS["Gym"], COLORS["Maison"]], width=0.70
-)
-ax.set_title("Distance totale parcouru par mois", fontsize=14, fontweight="bold", pad=12)  
-ax.set_xlabel("Mois")
-ax.set_ylabel("Distance (KM)")
-ax.set_xticklabels([str(m) for m in monthly.index], rotation=45, ha="right")
-ax.legend(title="Emplacement")
-ax.grid(axis="y", alpha=0.5)
-
-for i, (idx, row) in enumerate(monthly.iterrows()):
-    total = row["Gym"] + row["Maison"]
-    ax.text(i, total + 0.5, f"{total:.1f} km", ha="center", va="bottom", fontsize=10)
-fig.tight_layout()
-fig.savefig(GRAPHS_DIR / "Distance_par_mois.png")
-plt.close()
-print("Graphique Distance par mois créée ✅")f["Temps en minutes"].min(), df["Temps en minutes"].max(), 100)
+x_line = np.linspace(df["Temps en minutes"].min(), df["Temps en minutes"].max(), 100)
 ax.plot(x_line, p(x_line), "--", color="gray", linewidth=1.5, label="Tendance Globale")
 
 ax.set_title("Distance parcourue VS Durée ", fontsize=16, fontweight="bold", pad=12)
@@ -242,3 +227,8 @@ print("3. La relation entre la durée et la distance parcourue montre une corré
 print("4. Globalement, les données suggèrent une progression significative de la performance en vélo stationnaire, avec une préférence marquée pour les séances à la maison, qui ont tendance à être plus longues et plus intenses que celles au gym.")
 
 print("5. Les graphiques créés fournissent une visualisation claire de l'évolution de la performance, des comparaisons entre les environnements, et des tendances générales dans les données, ce qui peut être utile pour orienter les futures séances d'entraînement et suivre les progrès au fil du temps.")
+
+## Fin du rapport
+sys.stdout = sys.__stdout__
+rapport.close()
+print("Rapport analyse txt crée ✅")

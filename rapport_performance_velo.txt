@@ -1,0 +1,33 @@
+ANALYSE DE PERFORMANCE EN VÉLO STATIONNAIRE🚴🔥💪
+
+----------------------------------------
+ 🏋️ GYM (36 séances)
+----------------------------------------
+Distance -> moy 7.1 km | écart-type 3.1 km
+Distance -> min 2.5 km | max 13.0 km | total 256.0 km
+Vitesse -> moy 21.8 KM/H | max 24.7 KM/H
+Durée -> moyenne 19.4 minutes
+
+----------------------------------------
+ 🏡 MAISON (19 séances)
+----------------------------------------
+Distance -> moy 12.9 km | écart-type 6.1 km
+Distance -> min 6.7 km | max 25.0 km | total 245.8 km
+Vitesse -> moy 26.2 KM/H | max 29.2 KM/H
+Durée -> moyenne 29.7 minutes
+
+----------------------------------------
+TOTAL -> 55 séances | 501.8km
+Graphique Distance parcouru par séance créer ✅
+Graphique Gym VS Maison crée ✅
+Graphique Distance par mois créée ✅
+Graphique Nombre de séances par mois créé ✅
+Graphique Distance VS Durée créé ✅
+
+ANALYSE DE PERFORMANCE EN VÉLO STATIONNAIRE - CONCLUSION
+--------------------------------------------------
+1. La distance parcourue par séance a montré une tendance à l'augmentation au fil du temps, avec des séances plus longues et plus intenses à la maison que au gym.
+2. La vitesse moyenne en KM/H était généralement plus élevée lors des séances à la maison, suggérant une meilleure performance ou un effort plus soutenu dans cet environnement.
+3. La relation entre la durée et la distance parcourue montre une corrélation positive, indiquant que les séances plus longues tendent à correspondre à des distances plus grandes, ce qui est cohérent avec une amélioration de la performance au fil du temps.
+4. Globalement, les données suggèrent une progression significative de la performance en vélo stationnaire, avec une préférence marquée pour les séances à la maison, qui ont tendance à être plus longues et plus intenses que celles au gym.
+5. Les graphiques créés fournissent une visualisation claire de l'évolution de la performance, des comparaisons entre les environnements, et des tendances générales dans les données, ce qui peut être utile pour orienter les futures séances d'entraînement et suivre les progrès au fil du temps.
